@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'dart:async';
 
 import '../../domain/cart_item.dart';
@@ -69,7 +70,7 @@ class _CartItemViewState extends ConsumerState<CartItemView> {
           children: [
             Consumer(builder: (context, ref, child) {
               final isSelected = ref.watch(selectedItemsProvider.select(
-                (state) => state.contains(widget.cartItem),
+                (state) => state.any((item) => item.id == widget.cartItem.id),
               ));
               return Checkbox(
                 value: isSelected,
@@ -93,7 +94,7 @@ class _CartItemViewState extends ConsumerState<CartItemView> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '\$${(widget.cartItem.price / 100).toStringAsFixed(2)}',
+                    '₩${NumberFormat('###,###,###').format(widget.cartItem.price)}',
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ],

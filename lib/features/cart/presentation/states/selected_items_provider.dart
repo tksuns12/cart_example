@@ -27,12 +27,21 @@ class SelectedItems extends _$SelectedItems {
         _removeAbsentItem(next);
       }
     }
+    _updateQuantity(next);
   }
 
   /// 장바구니에 없는 항목은 빼도록 하는 메서드
   void _removeAbsentItem(AsyncValue<List<dynamic>> currentCartItems) {
     state =
         state.where((item) => currentCartItems.value!.contains(item)).toList();
+  }
+
+  void _updateQuantity(AsyncValue<List<dynamic>> currentCartItems) {
+    state = state.map((item) {
+      final cartItem =
+          currentCartItems.value!.firstWhere((e) => e.id == item.id);
+      return item.copyWith(quantity: cartItem.quantity);
+    }).toList();
   }
 
   Future<void> addItem(CartItem item) async {
@@ -44,6 +53,6 @@ class SelectedItems extends _$SelectedItems {
   }
 
   void toggleAll(bool value) {
-    state = value ? ref.watch(cartItemsProvider).valueOrNull ?? [] : [];
+    state = value ? ref.read(cartItemsProvider).valueOrNull ?? [] : [];
   }
 }

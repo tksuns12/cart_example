@@ -12,20 +12,25 @@ class SelectAllCheckbox extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedItems = ref.watch(selectedItemsProvider);
     final cartItems = ref.watch(cartItemsProvider);
-    final allSelected = const DeepCollectionEquality()
-        .equals(selectedItems, cartItems.valueOrNull ?? []);
+    final allSelected = const DeepCollectionEquality().equals(
+        selectedItems.map((item) => item.id),
+        (cartItems.valueOrNull ?? []).map((e) => e.id));
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Checkbox(
-          value: allSelected,
-          onChanged: (value) {
-            if (value == null) return;
-            ref.read(selectedItemsProvider.notifier).toggleAll(value);
-          },
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Checkbox(
+            value: allSelected,
+            onChanged: (value) {
+              if (value == null) return;
+              ref.read(selectedItemsProvider.notifier).toggleAll(value);
+            },
+          ),
+          const Text('전체 선택'),
+        ],
+      ),
     );
   }
-} 
+}

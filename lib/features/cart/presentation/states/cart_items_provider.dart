@@ -14,23 +14,20 @@ class CartItems extends _$CartItems {
 
   Future<void> addCartItem(CartItem item) async {
     await cartService.addCartItem(item);
-    state = AsyncValue.data([...state.valueOrNull ?? [], item]);
+    update((state) => [...state, item]);
   }
 
   Future<void> removeCartItem(String id) async {
     await cartService.removeCartItem(id);
-    state = AsyncValue.data(
-        state.valueOrNull?.where((e) => e.id != id).toList() ?? []);
+    update((state) => state.where((e) => e.id != id).toList());
   }
 
   Future<void> updateCartItem(CartItem item) async {
     await cartService.updateCartItem(item);
-    state = AsyncValue.data(
-        state.valueOrNull?.map((e) => e.id == item.id ? item : e).toList() ??
-            []);
+    update((state) => state.map((e) => e.id == item.id ? item : e).toList());
   }
 
   void clear() {
-    state = const AsyncValue.data([]);
+    update((state) => []);
   }
 }

@@ -97,7 +97,7 @@ class _ButtonChild extends StatelessWidget {
 
     if (hasError) {
       return Text(
-        '다시 시도 (₩${NumberFormat('###,###,###').format(totalAmount)}원)',
+        '다시 시도 (₩${NumberFormat('###,###,###').format(totalAmount)})',
         style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,
@@ -109,7 +109,7 @@ class _ButtonChild extends StatelessWidget {
     return Text(
       totalAmount <= 0
           ? '물건을 담아주세요.'
-          : '결제하기 (₩${NumberFormat('###,###,###').format(totalAmount)}원)',
+          : '결제하기 (₩${NumberFormat('###,###,###').format(totalAmount)})',
       style: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.bold,
