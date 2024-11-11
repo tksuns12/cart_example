@@ -1327,4 +1327,4 @@ class _CartScreenState extends ConsumerState<CartScreen> {
 
 매쓰튜터 프로젝트에서는 이런 방식으로 상태를 관리해 나가려고 합니다. `OOController`를 선언하거나 `Animation`을 다루는 경우, 혹은 `Side-effect` 관리를 위해 `Future` 선언이 필요한 경우가 아니라면 웬만하면 `StatefulWidget`을 쓰지 않으려고 합니다. 웬만한 상태는 `Provider`를 통해 제공하고, 업데이트 하고, 서로 간의 의존성을 관리하려 합니다.
 
-긴 글 읽어주셔서 감사하고, 문의 사항이 있으시면 [Discussion]()쪽에 올려주시면 감사하겠습니다.
+긴 글 읽어주셔서 감사하고, 문의 사항이 있으시면 [Discussion](https://github.com/tksuns12/cart_example/discussions)쪽에 올려주시면 감사하겠습니다.
